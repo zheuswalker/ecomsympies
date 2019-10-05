@@ -33,7 +33,12 @@ class frontProductsController extends Controller
             $Allprod = sympiesProvider::format($Allprod);
             return view('pages.frontend-shop.list-front-products', compact('Allprod', 'aff', 'cat'));
 
-
+         // \DB::TABLE('users')
+         //  ->WHERE('email', 'islandrose@gmail.com')
+         //    ->UPDATE([
+         //        'password' => bcrypt('member')
+         //    ]);
+         //    return "sucess";
     }
 
     /**

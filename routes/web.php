@@ -176,8 +176,12 @@ Route::get('/get/user-invoice/{id}',function($id){
         ->where('INV_ID',$invoice->INV_ID)
         ->first();
 
-    return view('pages.invoices.user-invoice'
-        ,compact('order','order_items','invoice','shipment','payment','product','product_variances'));
+    // return view('pages.invoices.user-invoice'
+    //     ,compact('order','order_items','invoice','shipment','payment','product','product_variances'));
+         return view('pages.invoices.user-invoice'
+        ,compact('order','order_items','invoice','shipment','payment'));
+
+
 });
 
 

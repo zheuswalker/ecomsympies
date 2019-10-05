@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cryptor;
+use App\Decryptor;
+use App\Encryptor;
 
 class MobileMarketController extends Controller
 {
@@ -11,8 +14,12 @@ class MobileMarketController extends Controller
     	$feedcontent = \DB::SELECT("select rmf_itemtosale, rmf_saleimagesource from r_market_flashsales");
 
     	$output = json_encode(array('marketsales' => $feedcontent ));
-		//$jsonData = json_encode($app);
-		echo $output;
+		
+		if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
 
     }
 
@@ -32,7 +39,11 @@ class MobileMarketController extends Controller
 
     	$output = json_encode(array('feedcontent' => $feedcontent ));
 		//$jsonData = json_encode($app);
-		echo $output;
+		if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function getItemsonMarket()
@@ -41,7 +52,11 @@ class MobileMarketController extends Controller
 
     	$output = json_encode(array('feedcontent' => $feedcontent ));
 		//$jsonData = json_encode($app);
-		echo $output;
+		if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function getItemsonMarketCart()
@@ -50,7 +65,11 @@ class MobileMarketController extends Controller
 
     	$output = json_encode(array('feedcontent' => $feedcontent ));
 		//$jsonData = json_encode($app);
-		echo $output;
+		if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function getItemsonMarketChocolate()
@@ -59,7 +78,11 @@ class MobileMarketController extends Controller
 
     	$output = json_encode(array('feedcontent' => $feedcontent ));
 		//$jsonData = json_encode($app);
-		echo $output;
+		if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function getItemsonMarketFlower()
@@ -68,7 +91,11 @@ class MobileMarketController extends Controller
 
     	$output = json_encode(array('feedcontent' => $feedcontent ));
 		//$jsonData = json_encode($app);
-		echo $output;
+		if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function getItemsonMarketStuffToys()
@@ -77,7 +104,11 @@ class MobileMarketController extends Controller
 
     	$output = json_encode(array('feedcontent' => $feedcontent ));
 		//$jsonData = json_encode($app);
-		echo $output;
+		if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function getProductDetails()
@@ -86,7 +117,11 @@ class MobileMarketController extends Controller
         $feedcontent = \DB::SELECT("SELECT PROD_NOTE rmd_itemdesc, PROD_MY_PRICE itemprice FROM r_product_infos where PROD_NAME = ?", ['Pure White']);
 
         $output = json_encode(array('proddetails' => $feedcontent ));
-        echo $output;
+        if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function getTopGiftedPerson()
@@ -94,14 +129,22 @@ class MobileMarketController extends Controller
         $gitftedperson = \DB::SELECT("select count(tct_recieverid) id , tct_recieverid, r_account_credentials.rac_username username, r_account_credentials.rac_profilepicture userpic from t_cart_transact INNER JOIN r_account_credentials ON r_account_credentials.rac_accountid = t_cart_transact.tct_recieverid where t_cart_transact.tct_userid = (select rac_accountid from r_account_credentials where rac_username = ?) GROUP by tct_recieverid limit 3", ['playhouse']);
 
         $output = json_encode(array('gitftedperson' => $giftedperson));
-        echo $output;
+        if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function gettopitemsonmarket()
     {
         $topitems = \DB::SELECT("select PROD_NAME itemname, PROD_MY_PRICE itemprice ,PROD_IMG  itemimage from r_product_infos limit 3");
         $output = json_encode(array('topitems' => $topitems));
-        echo $output;
+        if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
 
     }
 
@@ -109,7 +152,11 @@ class MobileMarketController extends Controller
     {
         $feedcontent = \DB::SELECT("select r_marketitems_details.rmd_itemname,r_marketitems_details.rmd_itemimage, count(t_cart_transact.tct_iteminclude) from t_cart_transact inner join r_marketitems_details on t_cart_transact.tct_iteminclude = r_marketitems_details.rmd_itemid WHERE t_cart_transact.tct_userid = (select r_account_credentials.rac_accountid from r_account_credentials where r_account_credentials.rac_username = ?) GROUP by r_marketitems_details.rmd_itemname limit 1",['playhouse']);
         $output = json_encode(array('userdetails' => $feedcontent));
-        echo $output;
+        if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 
     public function getUserDetailsinMarket()
@@ -117,6 +164,10 @@ class MobileMarketController extends Controller
         $feedcontent = \DB::SELECT("select count(t_account_friends.tafr_friendlyuserid) as totfriend,r_account_credentials.rac_email, r_account_credentials.rac_profilepicture from r_account_credentials INNER join t_account_friends on t_account_friends.tafr_friendlyuserid = r_account_credentials.rac_accountid where r_account_credentials.rac_username = ?",['playhouse']);
 
         $output = json_encode(array('userdetails' => $feedcontent ));
-        echo $output;
+        if($output == "") {
+            echo "";
+        }else {
+            echo $output;    
+        }
     }
 }
